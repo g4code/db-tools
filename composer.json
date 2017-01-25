@@ -23,9 +23,5 @@
   "require": {
     "php"            : ">=5.3",
     "ruckusing/ruckusing-migrations" : "1.1.*"
-  },
-  "minimum-stability": "dev",
-  "autoload": {
-
   }
 }
