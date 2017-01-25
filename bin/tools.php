@@ -1,8 +1,9 @@
 <?php
 /**
- * Variables defined inside bootstrap.php
+ * Variables defined inside src/bootstrap.php
  *
  * @var $dbConfigData array
+ * @var $options array
  */
 
 include __DIR__ . '/../src/bootstrap.php';

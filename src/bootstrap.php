@@ -4,12 +4,16 @@ date_default_timezone_set('Europe/Belgrade');
 
 chdir(dirname(__DIR__));
 
-$options = getopt('', [ 'env:' ]);
+$options = getopt('', [ 'env:', 'sql-dump' ]); // todo getopt not in use
 
 foreach ($argv as $argument) {
     preg_match('~^env=(.*)$~uxsi', $argument, $matches);
     if (!empty($matches)) {
         $options['env'] = $matches[1];
+    }
+    preg_match('~^sql-dump=(.*)$~uxsi', $argument, $matches);
+    if (!empty($matches) && $matches[1] !== "") {
+        $options['sql-dump'] = $matches[1];
     }
 }
 
