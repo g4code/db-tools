@@ -6,7 +6,7 @@
  * @var $dbConfigData array
  */
 
-$localPath = realpath(getcwd() . "/../../../../db/");
+$localPath = __DIR__ . '/../../../../db/';
 
 return [
     'db' => [
@@ -23,7 +23,7 @@ return [
         ]
     ],
     'migrations_dir' => ['default' => $localPath . '/migrations'],
-    'db_dir'         => $localPath . '/db',
+    'db_dir'         => $localPath . '/dumps',
     'log_dir'        => $localPath . '/logs',
     'ruckusing_base' => $localPath . '/../vendor/ruckusing/ruckusing-migrations'
 ];
