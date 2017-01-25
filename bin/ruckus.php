@@ -1,5 +1,5 @@
 #!/usr/bin/env php
 <?php
 
-require_once realpath(implode(DIRECTORY_SEPARATOR, [__DIR__, 'bootstrap.php']));
-require_once realpath(getcwd() . '/../../../ruckusing/ruckusing-migrations/ruckus.php');
+require_once __DIR__ . '/../src/bootstrap.php';
+require_once __DIR__ . '/../../../ruckusing/ruckusing-migrations/ruckus.php';

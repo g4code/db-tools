@@ -5,11 +5,9 @@
  * @var $dbConfigData array
  */
 
-include __DIR__ . DIRECTORY_SEPARATOR . 'bootstrap.php';
+include __DIR__ . '/../src/bootstrap.php';
 
 $mysqlConnectCommand = "mysql -u {$dbConfigData['username']} -p{$dbConfigData['password']} -h {$dbConfigData['host']}";
-$dbSourceFilePath = realpath(implode(DIRECTORY_SEPARATOR, [__DIR__, 'db', 'nd_api_v1.0.0.sql']));
-$dbGeonameFilePath = realpath(implode(DIRECTORY_SEPARATOR, [__DIR__, 'db', 'geoname.compact.sql']));
 
 $command = '/bin/echo nothing to execute';
 
@@ -25,13 +23,28 @@ if (in_array('drop:database', $argv)) {
 
 // IMPORT DATA
 if (in_array('import:data', $argv)) {
-    $command = $mysqlConnectCommand . " {$dbConfigData['dbname']} --execute=\"source {$dbSourceFilePath}\" --force";
+    $sqlDumpFile = getSqlDumpPath($options);
+    $command = $mysqlConnectCommand . " {$dbConfigData['dbname']} --execute=\"source $sqlDumpFile\" --force";
 }
 
 // GEONAME TABLE IMPORT
 if (in_array('import:geoname', $argv)) {
-    $command = $mysqlConnectCommand . " {$dbConfigData['dbname']} --execute=\"source {$dbGeonameFilePath}\" --force";
+    $sqlDumpFile = getSqlDumpPath($options);
+    $command = $mysqlConnectCommand . " {$dbConfigData['dbname']} --execute=\"source $sqlDumpFile\" --force";
 }
 
 $output = shell_exec($command);
 echo("\n" . $output . "\n");
+
+
+function getSqlDumpPath($options)
+{
+    if (!array_key_exists('sql-dump', $options)) {
+        die("\nError: sql-dump command line parameter with SQL dump file is not supplied.\n\n");
+    }
+    $filePath = realpath(PATH_ROOT . DIRECTORY_SEPARATOR . $options['sql-dump']);
+    if (!$filePath) {
+        die(sprintf("\nFile '%s' does not exist relative to path '%s'\n\n", $options['sql-dump'], PATH_ROOT));
+    }
+    return $filePath;
+}
