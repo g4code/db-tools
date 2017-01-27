@@ -40,3 +40,8 @@ RUCKUSING_DIR    = db
 ND_API_SQL_DUMP  = $(RUCKUSING_DIR)/dumps/nd_api_v1.0.0.sql
 GEONAME_SQL_DUMP = $(RUCKUSING_DIR)/dumps/geoname.compact.sql
 ```
+
+Import db-tools makefile targets into project's Makefile with
+```
+include vendor/g4/db-tools/dbtools.mk
+```
