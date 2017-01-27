@@ -6,7 +6,11 @@
  * @var $dbConfigData array
  */
 
-$localPath = __DIR__ . '/../../../../db/';
+if (!array_key_exists('ruckusing_dir', $options)) {
+    die("\nMissing config for 'ruckusing_dir' which contains database related files.\n\n");
+}
+
+$localPath = __DIR__ . '/../../../../' . $options['ruckusing_dir'];
 
 return [
     'db' => [
@@ -18,12 +22,12 @@ return [
             'user'      => $dbConfigData['username'],
             'password'  => $dbConfigData['password'],
             'charset'   => 'utf8',
-            'directory' => 'nd_api_slim',
+            'directory' => 'default',
             //'socket' => '/var/run/mysqld/mysqld.sock'
         ]
     ],
-    'migrations_dir' => ['default' => $localPath . '/migrations'],
-    'db_dir'         => $localPath . '/dumps',
-    'log_dir'        => $localPath . '/logs',
-    'ruckusing_base' => $localPath . '/../vendor/ruckusing/ruckusing-migrations'
+    'migrations_dir' => ['default' => realpath($localPath . '/migrations')],
+    'db_dir'         => realpath($localPath . '/dumps'),
+    'log_dir'        => realpath($localPath . '/logs'),
+    'ruckusing_base' => realpath($localPath . '/../vendor/ruckusing/ruckusing-migrations')
 ];

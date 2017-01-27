@@ -1,51 +1,47 @@
 <?php
 
-date_default_timezone_set('Europe/Belgrade');
+/**
+ * @var $options array
+ */
+require __DIR__ . '/../src/common.php';
 
 chdir(dirname(__DIR__));
 
-$options = getopt('', [ 'env:', 'sql-dump' ]); // todo getopt not in use
-
-foreach ($argv as $argument) {
-    preg_match('~^env=(.*)$~uxsi', $argument, $matches);
-    if (!empty($matches)) {
-        $options['env'] = $matches[1];
-    }
-    preg_match('~^sql-dump=(.*)$~uxsi', $argument, $matches);
-    if (!empty($matches) && $matches[1] !== "") {
-        $options['sql-dump'] = $matches[1];
-    }
-}
-
-if (empty($options['env'])) {
-    die("\nEnv param is empty\n\n");
-}
-define('APPLICATION_ENV', $options['env']);
 define('PATH_ROOT', realpath(getcwd() . '/../../../') . '/');
 
 require_once realpath(getcwd() . '/../../autoload.php');
-require_once realpath(getcwd() . '/../../../application/setup/bootstrap.php');
 
-if (!is_array(\App\DI::configData())) {
+try {
+    $applicationIniConf = new \G4\Config\Config();
+    $applicationIniData = $applicationIniConf
+        ->setPath(realpath(PATH_ROOT . $options['ini']))
+        ->setSection($options['env'])
+        ->setCachingEnabled(false)
+        ->getData(true);
+} catch (\Exception $exception) {
+    die("\n application.ini: " . $exception->getMessage() . "\n\n");
+}
+
+if (!is_array($applicationIniData)) {
     die("\nDI didn't load config data from application.ini");
 }
-if(!isset(\App\DI::configData()['resources']['db']['params']['host'])) {
+if(!isset($applicationIniData['resources']['db']['params']['host'])) {
     die("\nDB host param is not set\n\n");
 }
-if(!isset(\App\DI::configData()['resources']['db']['params']['port'])) {
+if(!isset($applicationIniData['resources']['db']['params']['port'])) {
     die("\nDB port param is not set\n\n");
 }
-if(!isset(\App\DI::configData()['resources']['db']['params']['dbname'])) {
+if(!isset($applicationIniData['resources']['db']['params']['dbname'])) {
     die("\nDB dbname param is not set\n\n");
 }
-if(!isset(\App\DI::configData()['resources']['db']['params']['username'])) {
+if(!isset($applicationIniData['resources']['db']['params']['username'])) {
     die("\nDB username param is not set\n\n");
 }
-if(!isset(\App\DI::configData()['resources']['db']['params']['password'])) {
+if(!isset($applicationIniData['resources']['db']['params']['password'])) {
     die("\nDB password param is not set\n\n");
 }
 
-$dbConfigData = \App\DI::configData()['resources']['db']['params'];
+$dbConfigData = $applicationIniData['resources']['db']['params'];
 
 echo "params: {$dbConfigData['host']} | {$dbConfigData['dbname']} | {$dbConfigData['username']} | {$dbConfigData['password']}";
 
