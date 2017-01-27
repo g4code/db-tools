@@ -22,7 +22,15 @@ foreach ($argv as $argument) {
 }
 
 if (empty($options['env'])) {
-    die("\nEnv param is empty\n\n");
+    die("\nenv param is empty\n\n");
+}
+
+if (empty($options['ini'])) {
+    die("\nini param is empty\n\n");
+}
+
+if (empty($options['ruckusing_dir'])) {
+    die("\nruckusing_dir param is empty.\n\n");
 }
 
 define('APPLICATION_ENV', $options['env']);

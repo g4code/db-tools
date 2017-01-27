@@ -6,10 +6,6 @@
  * @var $dbConfigData array
  */
 
-if (!array_key_exists('ruckusing_dir', $options)) {
-    die("\nMissing config for 'ruckusing_dir' which contains database related files.\n\n");
-}
-
 $localPath = __DIR__ . '/../../../../' . $options['ruckusing_dir'];
 
 return [
