@@ -1,4 +1,5 @@
 .idea/
+.project
 vendor/
 composer.lock
 composer.phar
