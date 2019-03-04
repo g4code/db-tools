@@ -9,6 +9,10 @@ chdir(dirname(__DIR__));
 
 define('PATH_ROOT', realpath(getcwd() . '/../../../') . '/');
 
+if (getenv('PLATFORM_ENV')){
+    $options['ini'] = str_replace('application.ini', 'application-'.getenv('PLATFORM_ENV').'.ini', $options['ini']);
+}
+
 require_once realpath(getcwd() . '/../../autoload.php');
 
 try {
