@@ -44,8 +44,8 @@ db-re-migrate: environment
 	&& $(MAKE) db-migrate
 
 db-migration-new: environment
-	@/bin/echo -e "${TITLE} create new migration script..." \
-	&& php vendor/g4/db-tools/bin/ruckus.php db:generate $(name) env=$(env) ini=${APPLICATION_INI}  ruckusing_dir=${RUCKUSING_DIR} \
+	@/bin/echo -e "${TITLE} create new migration script...${APPLICATION_INI}" \
+	&& php vendor/g4/db-tools/bin/ruckus.php nd:generateplatformspecific $(name) env=$(env) ini=${APPLICATION_INI}  ruckusing_dir=${RUCKUSING_DIR} \
 	&& /bin/echo -e "${TITLE} new migration script created"
 
 db-migration-status: environment

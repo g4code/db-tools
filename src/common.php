@@ -35,11 +35,8 @@ if (empty($options['ruckusing_dir'])) {
 
 define('APPLICATION_ENV', $options['env']);
 
-function checkRequiredFolders()
+function checkRequiredFolders($ruckusingConf)
 {
-    global $options, $dbConfigData;
-    $ruckusingConf = require __DIR__ . '/../src/ruckusing.conf.php';
-    
     if (!$ruckusingConf['migrations_dir']['default']) {
         die("\nMissing folder 'migrations'.\n\n");
     }
@@ -52,7 +49,6 @@ function checkRequiredFolders()
     if (!$ruckusingConf['ruckusing_base']) {
         die("\nMissing ruckusing/ruckusing-migration spackage.\n\n");
     }
-    
 }
 
 function getSqlDumpPath($options)
