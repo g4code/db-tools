@@ -47,7 +47,7 @@ function checkRequiredFolders($ruckusingConf)
         die("\nMissing folder 'logs'.\n\n");
     }
     if (!$ruckusingConf['ruckusing_base']) {
-        die("\nMissing ruckusing/ruckusing-migration spackage.\n\n");
+        die("\nMissing g4/ruckusing-migrations package.\n\n");
     }
 }
 
