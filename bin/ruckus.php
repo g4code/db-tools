@@ -3,6 +3,10 @@
 
 require_once __DIR__ . '/../src/bootstrap.php';
 
-checkRequiredFolders();
+$ruckusingConf = require __DIR__ . '/../src/ruckusing.conf.php';
+checkRequiredFolders($ruckusingConf);
 
-require_once __DIR__ . '/../../../ruckusing/ruckusing-migrations/ruckus.php';
+$argv[] = 'platforms=' . implode(',', $ruckusingConf['platforms']);
+$argc++;
+
+require_once __DIR__ . '/../../../g4/ruckusing-migrations/ruckus.php';

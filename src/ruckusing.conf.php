@@ -25,5 +25,7 @@ return [
     'migrations_dir' => ['default' => realpath($localPath . '/migrations')],
     'db_dir'         => realpath($localPath . '/dumps'),
     'log_dir'        => realpath($localPath . '/logs'),
-    'ruckusing_base' => realpath($localPath . '/../vendor/ruckusing/ruckusing-migrations')
+    'ruckusing_base' => realpath($localPath . '/../vendor/ruckusing/ruckusing-migrations'),
+    'tasks_dir'      => realpath(__DIR__ . '/Task'),
+    'platforms'       => ['ALL', 'EUD', 'SD'],
 ];
