@@ -41,11 +41,6 @@ class $className extends Ruckusing_Migration_Base
 {
     public function up()
     {
-        if (!\$this->shouldExecuteMigration($this->platform)) {
-            print "Migration $className for platform=$this->platform skipped" . PHP_EOL;
-            return;
-        }
-
         // TODO: add migration up code
     }//up()
 
@@ -53,15 +48,6 @@ class $className extends Ruckusing_Migration_Base
     {
         // TODO: add migration down code
     }//down()
-    
-    private function shouldExecuteMigration(\$targetPlatform = 'ALL')
-    {
-        if (\$targetPlatform === 'ALL') {
-            return true;
-        }
-        \$platformEnv = getenv('PLATFORM_ENV') ?: 'EUD';
-        return \$platformEnv === \$targetPlatform;
-    }
 }
 
 TPL;
