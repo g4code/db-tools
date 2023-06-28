@@ -27,5 +27,4 @@ return [
     'log_dir'        => realpath($localPath . '/logs'),
     'ruckusing_base' => realpath($localPath . '/../vendor/g4/ruckusing-migrations'),
     'tasks_dir'      => realpath(__DIR__ . '/Task'),
-    'platforms'       => ['ALL', 'EUD'],
 ];
