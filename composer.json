@@ -25,8 +25,8 @@
     }
   ],
   "require": {
-    "php"                            : ">=7.3",
-    "g4/config"                      : ">=1.0.0",
-    "g4/ruckusing-migrations"        : "1.2.*"
+    "php"                            : ">=8.2",
+    "g4/config"                      : ">=2.0.0",
+    "g4/ruckusing-migrations"        : "2.*"
   }
 }
